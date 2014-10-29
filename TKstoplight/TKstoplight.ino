@@ -1,59 +1,53 @@
 
 #include <TinkerKit.h>
 
-TKButton btn(I0);
-TKLed basic(O0);
-TKLed ratchet(O1);
-TKLed patricia(O2);
+TKPotentiometer pot(I0);
+TKLed red(O0);
+TKLed yellow(O1);
+TKLed green(O2);
 
-int bright = 0;
-int maxBright = 1023;
-int speed = 80;
-int direction = 1;
+// int bright = 0;
+// int maxBright = 1023;
+// int speed = 80;
+// int direction = 1;
 
 void setup()
 {
   Serial.begin(9600);
 }
 
-void loop()
-{
-  if(btn.pressed()) {      
-      Serial.println("pressed");
-    basic.on();     // turn LED on 
-  } else {
-    basic.off();    // turn LED off
-  }
+void loop(){
   
-  
-  if(btn.held()) {      
-      Serial.println("held");
-     tina();     // turn LED on 
-  } 
-    
-    
-    
-    
-  if(btn.released()) {
-        
-      Serial.println("released");
-    patricia.on();     // turn LED on 
-  } else {
-    patricia.off();    // turn LED off
-  
-  }
+  int potVal = pot.read();
+    Serial.print(potVal);                      
+red.off();
+yellow.off();
+green.off();
 
-  delay(50);  
+if(potVal > 100 && potVal < 649){
+  red.on();
 }
 
-void tina(){
-    ratchet.brightness(bright);
+if(potVal > 650 && potVal < 999){
+  yellow.on();
+}
+
+if(potVal > 1000){
+  green.on();
+}
+
+delay(10);
+
+}
+
+/*void tina(){
+    yellow.brightness(bright);
   bright += (speed * direction);
   
   if(bright > maxBright || bright < 0){
     direction *= -1;
   } 
 }
-
+*/
 
 
