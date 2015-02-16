@@ -45,7 +45,7 @@ int Steps = 0;
 boolean Direction = true;// gre
 unsigned long last_time;
 unsigned long currentMillis ;
-int steps_left=4095;
+int steps_left=1024;
 long time;
 
 
@@ -81,6 +81,7 @@ pinMode(IN4, OUTPUT);
   // set up the LCD's number of columns and rows: 
   lcd.begin(16, 2);
   // Print a message to the LCD.
+
 }
 
 void loop() {
@@ -97,7 +98,7 @@ if (val == HIGH){
   // (note: line 1 is the second row, since counting begins with 0):
   delay(100);
   
-  while(var < 10){ 
+  while(var < 30){ 
   lcd.setCursor(0, 0);
   delay(100);
   // print the number of seconds since reset:
@@ -109,7 +110,7 @@ if (val == HIGH){
   lcd.print("Mikaila");
         var++;
     }
-if (var = 6){
+if (var = 20){
    //   myservo.write(90, 15, true);
    stepstep();
       digitalWrite(ledPin2, HIGH);  
@@ -143,10 +144,7 @@ while(steps_left>0){
   steps_left--;
   }
   }
-   Serial.println(time);
-  Serial.println("Wait...!");
-  delay(2000);
-  steps_left=4095;
+  steps_left=1024;
 }
 void stepper(int xw){
   for (int x=0;x<xw;x++){
