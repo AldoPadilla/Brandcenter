@@ -11,7 +11,7 @@
  
   The circuit:
  * LCD RS pin to digital pin 12
- * LCD Enable pin to digital pin 11
+ * LCD Enable pin to digital pin 7 // Changed from OG 11 to 7 - ALDO
  * LCD D4 pin to digital pin 5
  * LCD D5 pin to digital pin 4
  * LCD D6 pin to digital pin 3
