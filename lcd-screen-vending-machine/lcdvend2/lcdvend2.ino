@@ -37,6 +37,17 @@
 
 // include the library code:
 #include <LiquidCrystal.h>
+#define IN1  8
+#define IN2  9
+#define IN3  10
+#define IN4  11
+int Steps = 0;
+boolean Direction = true;// gre
+unsigned long last_time;
+unsigned long currentMillis ;
+int steps_left=4095;
+long time;
+
 
 
 // initialize the library with the numbers of the interface pins
@@ -54,6 +65,11 @@ int state = 0;
 
 
 void setup() {
+ 
+ pinMode(IN1, OUTPUT); 
+pinMode(IN2, OUTPUT); 
+pinMode(IN3, OUTPUT); 
+pinMode(IN4, OUTPUT); 
   
     // initialize the LED pin as an output:
   pinMode(ledPin, OUTPUT);     
@@ -81,8 +97,7 @@ if (val == HIGH){
   // (note: line 1 is the second row, since counting begins with 0):
   delay(100);
   
-  
-  while(var < 30){ 
+  while(var < 10){ 
   lcd.setCursor(0, 0);
   delay(100);
   // print the number of seconds since reset:
@@ -94,8 +109,9 @@ if (val == HIGH){
   lcd.print("Mikaila");
         var++;
     }
-if (var = 20){
+if (var = 6){
    //   myservo.write(90, 15, true);
+   stepstep();
       digitalWrite(ledPin2, HIGH);  
 
               }
@@ -115,7 +131,85 @@ if (var = 20){
 
   }
   
-  
-  
 }
 
+void stepstep(){
+while(steps_left>0){
+  currentMillis = micros();
+  if(currentMillis-last_time>=1000){
+  stepper(1); 
+  time=time+micros()-last_time;
+  last_time=micros();
+  steps_left--;
+  }
+  }
+   Serial.println(time);
+  Serial.println("Wait...!");
+  delay(2000);
+  steps_left=4095;
+}
+void stepper(int xw){
+  for (int x=0;x<xw;x++){
+switch(Steps){
+   case 0:
+     digitalWrite(IN1, LOW); 
+     digitalWrite(IN2, LOW);
+     digitalWrite(IN3, LOW);
+     digitalWrite(IN4, HIGH);
+   break; 
+   case 1:
+     digitalWrite(IN1, LOW); 
+     digitalWrite(IN2, LOW);
+     digitalWrite(IN3, HIGH);
+     digitalWrite(IN4, HIGH);
+   break; 
+   case 2:
+     digitalWrite(IN1, LOW); 
+     digitalWrite(IN2, LOW);
+     digitalWrite(IN3, HIGH);
+     digitalWrite(IN4, LOW);
+   break; 
+   case 3:
+     digitalWrite(IN1, LOW); 
+     digitalWrite(IN2, HIGH);
+     digitalWrite(IN3, HIGH);
+     digitalWrite(IN4, LOW);
+   break; 
+   case 4:
+     digitalWrite(IN1, LOW); 
+     digitalWrite(IN2, HIGH);
+     digitalWrite(IN3, LOW);
+     digitalWrite(IN4, LOW);
+   break; 
+   case 5:
+     digitalWrite(IN1, HIGH); 
+     digitalWrite(IN2, HIGH);
+     digitalWrite(IN3, LOW);
+     digitalWrite(IN4, LOW);
+   break; 
+     case 6:
+     digitalWrite(IN1, HIGH); 
+     digitalWrite(IN2, LOW);
+     digitalWrite(IN3, LOW);
+     digitalWrite(IN4, LOW);
+   break; 
+   case 7:
+     digitalWrite(IN1, HIGH); 
+     digitalWrite(IN2, LOW);
+     digitalWrite(IN3, LOW);
+     digitalWrite(IN4, HIGH);
+   break; 
+   default:
+     digitalWrite(IN1, LOW); 
+     digitalWrite(IN2, LOW);
+     digitalWrite(IN3, LOW);
+     digitalWrite(IN4, LOW);
+   break; 
+}
+SetDirection();
+}
+} 
+void SetDirection(){
+if(Direction==1){ Steps++;}
+if(Steps>7){Steps=0;}
+}
