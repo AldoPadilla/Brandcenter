@@ -51,7 +51,7 @@ long time;
 
 
 // initialize the library with the numbers of the interface pins
-LiquidCrystal lcd(12, 7, 5, 4, 3, 2);
+LiquidCrystal lcd(12, 7, 5, 4, 3, 2); // 7 was 11 Originally  - ALDO
 
 const int buttonPin = 1;     // the number of the pushbutton pin
 const int ledPin =  13;      // the number of the LED pin
