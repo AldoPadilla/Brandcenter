@@ -37,25 +37,14 @@
 
 // include the library code:
 #include <LiquidCrystal.h>
-#define IN1  7
-#define IN2  8
-#define IN3  9
-#define IN4  10
-
-int Steps = 0;
-boolean Direction = true;// gre
-unsigned long last_time;
-unsigned long currentMillis ;
-int steps_left=4095;
-long time;
 
 
 // initialize the library with the numbers of the interface pins
-LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+LiquidCrystal lcd(12, 7, 5, 4, 3, 2);
 
 const int buttonPin = 1;     // the number of the pushbutton pin
 const int ledPin =  13;      // the number of the LED pin
-const int ledPin2 =  0;      // the number of the LED pin
+const int ledPin2 =  6;      // the number of the LED pin
 
 
 int var = 0;
@@ -66,13 +55,6 @@ int state = 0;
 
 void setup() {
   
-Serial.begin(115200);
-pinMode(IN1, OUTPUT); 
-pinMode(IN2, OUTPUT); 
-pinMode(IN3, OUTPUT); 
-pinMode(IN4, OUTPUT); 
-
-
     // initialize the LED pin as an output:
   pinMode(ledPin, OUTPUT);     
   pinMode(ledPin2, OUTPUT);      
@@ -113,7 +95,7 @@ if (val == HIGH){
         var++;
     }
 if (var = 20){
-    //  myservo.write(90, 15, true);
+   //   myservo.write(90, 15, true);
       digitalWrite(ledPin2, HIGH);  
 
               }
